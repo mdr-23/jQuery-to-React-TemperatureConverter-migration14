@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter</title>
+    <style>
+        .converter {
+            width: 300px;
+            margin: 0 auto;
+        }
+        .converter input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .converter button {
+            width: 100%;
+            padding: 5px;
+        }
+        .result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h1>Temperature Converter</h1>
+        <label>Celsius:</label>
+        <input type="number" id="celsius-input">
+        <label>Fahrenheit:</label>
+        <input type="number" id="fahrenheit-input">
+        <label>Kelvin:</label>
+        <input type="number" id="kelvin-input">
+        <button id="convert-btn">Convert</button>
+        <p class="result" id="result"></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#convert-btn').click(function() {
+                var celsius = parseFloat($('#celsius-input').val());
+                var fahrenheit = parseFloat($('#fahrenheit-input').val());
+                var kelvin = parseFloat($('#kelvin-input').val());
+
+                if (!isNaN(celsius)) {
+                    var fahrenheitResult = (celsius * 9/5) + 32;
+                    var kelvinResult = celsius + 273.15;
+
+                    $('#fahrenheit-input').val(fahrenheitResult.toFixed(2));
+                    $('#kelvin-input').val(kelvinResult.toFixed(2));
+                } else if (!isNaN(fahrenheit)) {
+                    var celsiusResult = (fahrenheit - 32) * 5/9;
+                    var kelvinResult = (fahrenheit + 459.67) * 5/9;
+
+                    $('#celsius-input').val(celsiusResult.toFixed(2));
+                    $('#kelvin-input').val(kelvinResult.toFixed(2));
+                } else if (!isNaN(kelvin)) {
+                    var celsiusResult = kelvin - 273.15;
+                    var fahrenheitResult = (kelvin * 9/5) - 459.67;
+
+                    $('#celsius-input').val(celsiusResult.toFixed(2));
+                    $('#fahrenheit-input').val(fahrenheitResult.toFixed(2));
+                } else {
+                    alert('Please enter a valid temperature value.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
